@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Evaluable - Unidad 1: Números y Operaciones (1º ESO)</title>
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent-purple: #6d28d9;
+            --accent-cyan: #0891b2;
+            --secondary: #0f766e;
+            --accent: #d97706;
+            --bg: #f1f5f9;
+            --card: #ffffff;
+            --text: #1e293b;
+            --border: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.55;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-top: 8px solid var(--accent-purple);
+        }
+
+        .header-inst {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--accent-purple);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header-inst h1 {
+            margin: 0;
+            font-size: 1.35rem;
+            color: var(--primary);
+            text-transform: uppercase;
+        }
+
+        .header-inst p {
+            margin: 2px 0 0;
+            font-size: 0.9rem;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .badge-curso {
+            background: var(--accent-purple);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .student-grid {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr 1.2fr;
+            gap: 10px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            margin-bottom: 20px;
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .field-group label {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .field-group input {
+            padding: 6px 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .unit-banner {
+            background: linear-gradient(135deg, #4c1d95, #0891b2);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .unit-banner h2 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .unit-banner p {
+            margin: 4px 0 0;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .recommendations {
+            background: #fffbeb;
+            border-left: 4px solid var(--accent);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 25px;
+            font-size: 0.92rem;
+        }
+
+        .recommendations strong {
+            color: #92400e;
+        }
+
+        #locked-banner {
+            display: none;
+            background: #fef2f2;
+            border: 2px solid #dc2626;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .exercise-card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: #ffffff;
+        }
+
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .exercise-title {
+            font-weight: 700;
+            font-size: 1.08rem;
+            color: #4c1d95;
+            margin: 0;
+        }
+
+        .criteria-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tag-ce {
+            background: #f3e8ff;
+            color: #5b21b6;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            border: 1px solid #ddd6fe;
+        }
+
+        .sub-question {
+            margin-top: 15px;
+            padding-left: 12px;
+            border-left: 3px solid #e2e8f0;
+        }
+
+        .sub-question p {
+            margin: 0 0 8px 0;
+        }
+
+        input[type="text"], input[type="number"], select, textarea {
+            padding: 7px 10px;
+            border: 1px solid #94a3b8;
+            border-radius: 5px;
+            font-size: 0.95rem;
+            background: #f8fafc;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            background: #ffffff;
+        }
+
+        input:disabled, select:disabled, textarea:disabled {
+            background-color: #f1f5f9 !important;
+            color: #0f172a !important;
+            border-color: #64748b !important;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 55px;
+            resize: vertical;
+        }
+
+        .inline-input {
+            width: 120px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .math-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .math-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .math-expr {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.92rem;
+        }
+
+        .rubric-table th, .rubric-table td {
+            border: 1px solid var(--border);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .rubric-table th {
+            background: #4c1d95;
+            color: white;
+            text-align: center;
+        }
+
+        .rubric-table td:not(:first-child) {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .rubric-table label {
+            display: block;
+            cursor: pointer;
+            font-size: 0.88rem;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .feedback.ok {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .feedback.err {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .feedback.info {
+            display: block;
+            background: #e0f2fe;
+            color: #075985;
+            border: 1px solid #7dd3fc;
+        }
+
+        .actions-bar {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover:not(:disabled) {
+            opacity: 0.92;
+        }
+
+        .btn:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .pdf-tip {
+            display: none;
+            text-align: center;
+            font-size: 0.88rem;
+            color: #0f766e;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        #results-panel {
+            display: none;
+            margin-top: 30px;
+            border: 2px solid var(--accent-purple);
+            border-radius: 10px;
+            padding: 20px;
+            background: #f8fafc;
+        }
+
+        #results-panel h3 {
+            margin-top: 0;
+            color: #4c1d95;
+            border-bottom: 2px solid var(--accent-purple);
+            padding-bottom: 8px;
+        }
+
+        .grades-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            font-size: 0.88rem;
+        }
+
+        .grades-table th, .grades-table td {
+            border: 1px solid #94a3b8;
+            padding: 9px;
+            text-align: center;
+        }
+
+        .grades-table th {
+            background: #4c1d95;
+            color: white;
+        }
+
+        .grades-table td.desc-col {
+            text-align: left;
+            font-size: 0.82rem;
+        }
+
+        .pill-grade {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        .pill-sb { background: #dcfce7; color: #166534; }
+        .pill-nt { background: #dbeafe; color: #1e40af; }
+        .pill-bi { background: #fef3c7; color: #92400e; }
+        .pill-in { background: #fee2e2; color: #991b1b; }
+
+        .global-score-box {
+            text-align: right;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4c1d95;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 700px) {
+            .student-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ESTILOS OPTIMIZADOS PARA IMPRESIÓN Y GUARDADO EN PDF NATIVO */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 12mm 12mm 12mm 12mm;
+            }
+
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 10.5pt;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+            }
+
+            .actions-bar, .pdf-tip, .recommendations {
+                display: none !important;
+            }
+
+            .exercise-card, #results-panel, .student-grid, .unit-banner, .header-inst {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .exercise-card {
+                padding: 12px 15px !important;
+                margin-bottom: 14px !important;
+                border: 1px solid #94a3b8 !important;
+            }
+
+            #results-panel {
+                margin-top: 16px !important;
+                padding: 14px !important;
+                border: 2px solid #4c1d95 !important;
+            }
+
+            .grades-table th, .grades-table td, .rubric-table th, .rubric-table td {
+                padding: 6px 8px !important;
+                font-size: 9pt !important;
+            }
+
+            input, select, textarea {
+                border: 1px solid #64748b !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="exam-document">
+    <!-- Cabecera -->
+    <div class="header-inst">
+        <div>
+            <h1>Departamento de Matemáticas · Prueba Evaluable</h1>
+            <p>Evaluación por Criterios · Entrega en Classroom</p>
+        </div>
+        <div class="badge-curso">1º ESO</div>
+    </div>
+
+    <!-- Datos del alumnado -->
+    <div class="student-grid">
+        <div class="field-group">
+            <label for="st-nombre">Nombre</label>
+            <input type="text" id="st-nombre" placeholder="Tu nombre">
+        </div>
+        <div class="field-group">
+            <label for="st-apellidos">Apellidos</label>
+            <input type="text" id="st-apellidos" placeholder="Tus apellidos">
+        </div>
+        <div class="field-group">
+            <label for="st-num">Nº Lista</label>
+            <input type="number" id="st-num" min="1" max="40" placeholder="12">
+        </div>
+        <div class="field-group">
+            <label for="st-grupo">Grupo</label>
+            <input type="text" id="st-grupo" placeholder="1º ESO A">
+        </div>
+        <div class="field-group">
+            <label for="st-fecha">Fecha</label>
+            <input type="date" id="st-fecha">
+        </div>
+    </div>
+
+    <!-- Banner Unidad -->
+    <div class="unit-banner">
+        <h2>🎮 UNIDAD 1: DE LOS NATURALES A LOS ENTEROS</h2>
+        <p>Misión: El equipo de videojuegos del instituto y el campeonato escolar</p>
+    </div>
+
+    <!-- Recomendaciones -->
+    <div class="recommendations">
+        <strong>Antes de empezar, lee esto:</strong>
+        <ol style="margin: 5px 0 0 18px; padding: 0;">
+            <li>Lee despacio cada pregunta y fíjate bien en los números que te dan.</li>
+            <li>Cuando tengas que escribir una frase, explícalo con tus palabras y buena letra.</li>
+            <li><strong>¡Ojo!</strong> Solo tienes <strong>un intento</strong>. Cuando pulses <strong>«Corregir y ver nota»</strong>, ya no podrás cambiar nada y podrás guardar el PDF para subirlo a <strong>Classroom</strong>.</li>
+        </ol>
+    </div>
+
+    <!-- Banner informativo tras bloquear -->
+    <div id="locked-banner">
+        🔒 PRUEBA ENTREGADA Y BLOQUEADA · Ya no puedes cambiar tus respuestas. Guarda el PDF y súbelo a Classroom.
+    </div>
+
+    <!-- EJERCICIO 1 -->
+    <div class="exercise-card" id="ej1">
+        <div class="exercise-header">
+            <h3 class="exercise-title">1. Visitas del vídeo de la final</h3>
+            <div class="criteria-tags">
+                <span class="tag-ce">CE 1.1</span>
+                <span class="tag-ce">CE 6.1</span>
+            </div>
+        </div>
+        <p>El vídeo resumen del torneo del instituto ha tenido <strong>47.820 visitas</strong> en una semana.</p>
+
+        <div class="sub-question">
+            <p><strong>a)</strong> Queremos poner en el cartel del vídeo un número más corto y fácil de leer, redondeado a las <strong>decenas de millar</strong>. ¿Qué número pondrías?
+            <input type="number" id="q1a" class="inline-input" placeholder="Número"> visitas</p>
+            <div class="feedback" id="fb-q1a"></div>
+        </div>
+
+        <div class="sub-question">
+            <p><strong>b)</strong> Elige cómo has redondeado el número y explica con tus palabras por qué es mejor poner ese número corto en el cartel:</p>
+            <div style="margin-bottom: 8px;">
+                <label>¿Hacia dónde redondeas?: </label>
+                <select id="q1b-tipo">
+                    <option value="">-- Elige una opción --</option>
+                    <option value="arriba">Hacia arriba (a 50.000)</option>
+                    <option value="abajo">Hacia abajo (a 40.000)</option>
+                </select>
+                <label style="margin-left: 15px;">¿Qué cifra miras para decidir?: </label>
+                <select id="q1b-cifra">
+                    <option value="">-- Elige --</option>
+                    <option value="7">El 7 (como es 5 o mayor, subo)</option>
+                    <option value="4">El 4 (como es menor que 5, bajo)</option>
+                    <option value="8">El 8 (como es 5 o mayor, subo)</option>
+                </select>
+            </div>
+            <textarea id="q1b-just" placeholder="Escribe aquí por qué es mejor poner un número corto en el cartel del vídeo..."></textarea>
+            <div class="feedback" id="fb-q1b"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 2 -->
+    <div class="exercise-card" id="ej2">
+        <div class="exercise-header">
+            <h3 class="exercise-title">2. Puntos en las partidas del torneo</h3>
+            <div class="criteria-tags">
+                <span class="tag-ce">CE 1.1</span>
+                <span class="tag-ce">CE 2.1</span>
+                <span class="tag-ce">CE 2.2</span>
+                <span class="tag-ce">CE 2.3</span>
+                <span class="tag-ce">CE 6.1</span>
+            </div>
+        </div>
+        <p>En este torneo se empieza en <strong>0 puntos</strong>, pero si pierdes puedes bajar por debajo de cero (números negativos).</p>
+        <p>En la <strong>Partida 1</strong>, Alex empezó con <strong>-2 puntos</strong> (2 puntos por debajo de cero). En la <strong>Partida 2</strong> ganó <strong>+7 puntos</strong>. Y en la <strong>Partida 3</strong> perdió <strong>8 puntos</strong>. Su amiga Sara acabó con <strong>+10 puntos</strong>.</p>
+
+        <div class="sub-question">
+            <p><strong>a)</strong> Escribe la cuenta que tienes que hacer para saber con cuántos puntos acabó Alex y pon el resultado final:</p>
+            <p>Cuenta: <input type="text" id="q2a-expr" style="width: 220px;" placeholder="Escribe la cuenta"> = 
+            <input type="number" id="q2a-res" class="inline-input" placeholder="Resultado"> puntos</p>
+            <div class="feedback" id="fb-q2a"></div>
+        </div>
+
+        <div class="sub-question">
+            <p><strong>b)</strong> ¿Cuántos puntos de <strong>diferencia</strong> hay desde los puntos de Alex hasta los <strong>+10 puntos</strong> de Sara? Elige también si la respuesta tiene sentido:</p>
+            <p>Diferencia: <input type="number" id="q2b-diff" class="inline-input" placeholder="Puntos"> puntos &nbsp;|&nbsp; 
+            ¿Tiene sentido?: 
+            <select id="q2b-val">
+                <option value="">-- Elige una respuesta --</option>
+                <option value="si">Sí, porque Alex está por debajo de 0 y Sara por encima de 0, así que hay que contar los pasos hasta 0 y luego hasta 10</option>
+                <option value="no">No, porque ningún jugador puede sacar más de 10 puntos de ventaja a otro</option>
+            </select></p>
+            <div class="feedback" id="fb-q2b"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 3 -->
+    <div class="exercise-card" id="ej3">
+        <div class="exercise-header">
+            <h3 class="exercise-title">3. Camisetas para el equipo</h3>
+            <div class="criteria-tags">
+                <span class="tag-ce">CE 1.1</span>
+                <span class="tag-ce">CE 2.1</span>
+                <span class="tag-ce">CE 2.2</span>
+                <span class="tag-ce">CE 2.3</span>
+                <span class="tag-ce">CE 6.1</span>
+            </div>
+        </div>
+        <p>El equipo del instituto va a comprar camisetas iguales para todos. Han pedido <strong>10 camisetas para jugadores</strong> y <strong>5 camisetas para reservas</strong>. Cada camiseta cuesta <strong>12 €</strong> y el equipo tiene ahorrados <strong>150 €</strong>.</p>
+
+        <div class="sub-question">
+            <p><strong>a)</strong> Escribe la cuenta para calcular cuánto cuestan todas las camisetas juntas y pon el precio total:</p>
+            <p>Cuenta: <input type="text" id="q3a-expr" style="width: 240px;" placeholder="Escribe la cuenta"> = 
+            <input type="number" id="q3a-res" class="inline-input" placeholder="Total"> €</p>
+            <div class="feedback" id="fb-q3a"></div>
+        </div>
+
+        <div class="sub-question">
+            <p><strong>b)</strong> Comprueba si les llega con los 150 € que tienen ahorrados:</p>
+            <p>¿Les llega el dinero? 
+            <select id="q3b-alc">
+                <option value="">-- Elige --</option>
+                <option value="no">No, les falta dinero</option>
+                <option value="si">Sí, les sobra dinero</option>
+            </select>
+            &nbsp;|&nbsp; ¿Cuánto dinero les sobra o les falta?: <input type="number" id="q3b-dif" class="inline-input" placeholder="Euros"> €</p>
+            <p style="margin-top: 8px;">Si ganan <strong>5 € por cada partida amistosa</strong> que juegan en el recreo, ¿cuántas partidas necesitan jugar para conseguir el dinero que les falta (pon 0 si les sobraba)? 
+            <input type="number" id="q3b-sem" class="inline-input" placeholder="Nº partidas"> partidas.</p>
+            <div class="feedback" id="fb-q3b"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 4 -->
+    <div class="exercise-card" id="ej4">
+        <div class="exercise-header">
+            <h3 class="exercise-title">4. Cuentas y multiplicaciones repetidas</h3>
+            <div class="criteria-tags">
+                <span class="tag-ce">CE 2.1</span>
+                <span class="tag-ce">CE 2.2</span>
+            </div>
+        </div>
+
+        <div class="sub-question">
+            <p><strong>a)</strong> Calcula el valor de estas potencias (multiplicaciones de un mismo número varias veces):</p>
+            <div class="math-grid">
+                <div class="math-item">
+                    <span class="math-expr">2<sup>3</sup> = 2 · 2 · 2 =</span>
+                    <input type="number" id="q4a1" style="width:75px;">
+                </div>
+                <div class="math-item">
+                    <span class="math-expr">5<sup>2</sup> = 5 · 5 =</span>
+                    <input type="number" id="q4a2" style="width:75px;">
+                </div>
+                <div class="math-item">
+                    <span class="math-expr">10<sup>3</sup> = 10 · 10 · 10 =</span>
+                    <input type="number" id="q4a3" style="width:85px;">
+                </div>
+            </div>
+            <div class="feedback" id="fb-q4a"></div>
+        </div>
+
+        <div class="sub-question">
+            <p><strong>b)</strong> Calcula estas operaciones combinadas (recuerda hacer primero los paréntesis y las multiplicaciones o divisiones):</p>
+            <div class="math-grid">
+                <div class="math-item">
+                    <span class="math-expr">20 - (6 + 4) + 5 =</span>
+                    <input type="number" id="q4b1" style="width:75px;">
+                </div>
+                <div class="math-item">
+                    <span class="math-expr">18 + 3 · (9 - 4) =</span>
+                    <input type="number" id="q4b2" style="width:75px;">
+                </div>
+                <div class="math-item">
+                    <span class="math-expr">30 - 24 : 6 + 2 =</span>
+                    <input type="number" id="q4b3" style="width:75px;">
+                </div>
+            </div>
+            <div class="feedback" id="fb-q4b"></div>
+        </div>
+    </div>
+
+    <!-- EJERCICIO 5 -->
+    <div class="exercise-card" id="ej5">
+        <div class="exercise-header">
+            <h3 class="exercise-title">5. Piensa cómo has trabajado</h3>
+            <div class="criteria-tags">
+                <span class="tag-ce">CE 7.1</span>
+            </div>
+        </div>
+        <p>Marca con sinceridad cómo te ha ido en esta prueba:</p>
+
+        <table class="rubric-table">
+            <thead>
+                <tr>
+                    <th style="width: 34%; text-align: left;">¿Qué tal me ha ido?</th>
+                    <th style="width: 22%;">Me costó mucho (1 pt)</th>
+                    <th style="width: 22%;">Regular / Bien (2 pts)</th>
+                    <th style="width: 22%;">Muy bien (3 pts)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. Problemas:</strong> ¿Entendí cómo hacer las cuentas de los puntos y las camisetas?</td>
+                    <td><label><input type="radio" name="m1" value="1"> No sabía por dónde empezar</label></td>
+                    <td><label><input type="radio" name="m1" value="2"> Me costó, pero lo hice</label></td>
+                    <td><label><input type="radio" name="m1" value="3"> Lo hice sin problemas</label></td>
+                </tr>
+                <tr>
+                    <td><strong>2. Leer bien:</strong> ¿Entendí los datos y lo que pedía cada pregunta?</td>
+                    <td><label><input type="radio" name="m2" value="1"> Tuve muchas dudas</label></td>
+                    <td><label><input type="radio" name="m2" value="2"> Tuve que leerlo varias veces</label></td>
+                    <td><label><input type="radio" name="m2" value="3"> Lo entendí a la primera</label></td>
+                </tr>
+                <tr>
+                    <td><strong>3. Corregir fallos:</strong> Cuando dudé en una cuenta...</td>
+                    <td><label><input type="radio" name="m3" value="1"> La dejé sin hacer</label></td>
+                    <td><label><input type="radio" name="m3" value="2"> La volví a intentar</label></td>
+                    <td><label><input type="radio" name="m3" value="3"> Vi el fallo y lo arreglé</label></td>
+                </tr>
+                <tr>
+                    <td><strong>4. Esfuerzo y calma:</strong> Durante toda la prueba...</td>
+                    <td><label><input type="radio" name="m4" value="1"> Me puse nervioso/a</label></td>
+                    <td><label><input type="radio" name="m4" value="2"> Seguí hasta terminar</label></td>
+                    <td><label><input type="radio" name="m4" value="3"> Trabajé tranquilo/a y seguro/a</label></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="margin-top: 12px;">
+            <label for="q5-comentario" style="font-size:0.9rem; font-weight:600;">¿Qué te ha salido mejor y qué tienes que practicar más?</label>
+            <textarea id="q5-comentario" placeholder="Escribe aquí tu respuesta..."></textarea>
+        </div>
+        <div class="feedback" id="fb-q5"></div>
+    </div>
+
+    <!-- PANEL DE CALIFICACIÓN POR CRITERIOS -->
+    <div id="results-panel">
+        <h3>📊 Nota por Criterios de Evaluación</h3>
+        <table class="grades-table">
+            <thead>
+                <tr>
+                    <th>Criterio</th>
+                    <th>Descripción del criterio de evaluación</th>
+                    <th>Preguntas</th>
+                    <th>Nota</th>
+                    <th>Nivel</th>
+                </tr>
+            </thead>
+            <tbody id="grades-tbody"></tbody>
+        </table>
+        <div class="global-score-box" id="global-score"></div>
+    </div>
+
+    <!-- BOTONERA DE ACCIÓN -->
+    <div class="actions-bar">
+        <button type="button" class="btn btn-primary" id="btn-corregir">✅ Corregir y ver nota</button>
+        <button type="button" class="btn btn-success" id="btn-pdf" style="display:none;">📥 Guardar PDF para Classroom</button>
+    </div>
+    <div class="pdf-tip" id="pdf-tip">
+        💡 En la ventana que se abre, elige destino <strong>«Guardar como PDF»</strong> y súbelo a Classroom.
+    </div>
+</div>
+
+<script>
+    let examenBloqueado = false;
+
+    const fechaInput = document.getElementById('st-fecha');
+    if (fechaInput) {
+        fechaInput.value = new Date().toISOString().split('T')[0];
+    }
+
+    function getRubricBadge(score) {
+        if (score >= 9) return '<span class="pill-grade pill-sb">SOBRESALIENTE</span>';
+        if (score >= 7) return '<span class="pill-grade pill-nt">NOTABLE</span>';
+        if (score >= 5) return '<span class="pill-grade pill-bi">SUFICIENTE / BIEN</span>';
+        return '<span class="pill-grade pill-in">INSUFICIENTE</span>';
+    }
+
+    function setFeedback(id, isOk, msg, isInfo) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.className = 'feedback ' + (isInfo ? 'info' : (isOk ? 'ok' : 'err'));
+        el.innerHTML = msg;
+    }
+
+    function sincronizarCamposParaImpresion() {
+        document.querySelectorAll('#exam-document input').forEach(function(inp) {
+            if (inp.type === 'radio' || inp.type === 'checkbox') {
+                if (inp.checked) inp.setAttribute('checked', 'checked');
+                else inp.removeAttribute('checked');
+            } else {
+                inp.setAttribute('value', inp.value);
+            }
+        });
+        document.querySelectorAll('#exam-document select').forEach(function(sel) {
+            Array.from(sel.options).forEach(function(opt) {
+                if (opt.selected) opt.setAttribute('selected', 'selected');
+                else opt.removeAttribute('selected');
+            });
+        });
+        document.querySelectorAll('#exam-document textarea').forEach(function(ta) {
+            ta.textContent = ta.value;
+        });
+    }
+
+    function bloquearCampos() {
+        examenBloqueado = true;
+        sincronizarCamposParaImpresion();
+        const campos = document.querySelectorAll('#exam-document input, #exam-document select, #exam-document textarea');
+        campos.forEach(function(campo) {
+            campo.disabled = true;
+        });
+
+        const btnCorregir = document.getElementById('btn-corregir');
+        btnCorregir.disabled = true;
+        btnCorregir.innerHTML = '🔒 Prueba Corregida y Bloqueada';
+
+        document.getElementById('locked-banner').style.display = 'block';
+    }
+
+    function corregirExamen() {
+        if (examenBloqueado) return;
+
+        const confirmar = window.confirm('¿Seguro que quieres entregar y corregir la prueba? Una vez corregida no podrás cambiar tus respuestas.');
+        if (!confirmar) return;
+
+        let s = {};
+
+        // --- EJERCICIO 1 ---
+        const q1a = parseFloat(document.getElementById('q1a').value);
+        if (q1a === 50000) {
+            s.q1a = 1;
+            setFeedback('fb-q1a', true, '✔ ¡Muy bien! 47.820 redondeado a las decenas de millar es 50.000.', false);
+        } else {
+            s.q1a = 0;
+            setFeedback('fb-q1a', false, '✘ Revisa: Como después del 4 va un 7 (que es mayor que 5), redondeamos hacia arriba a 50.000.', false);
+        }
+
+        const q1bTipo = document.getElementById('q1b-tipo').value;
+        const q1bCifra = document.getElementById('q1b-cifra').value;
+        const q1bJust = document.getElementById('q1b-just').value.trim();
+        let pts1b = 0;
+        if (q1bTipo === 'arriba') pts1b += 0.4;
+        if (q1bCifra === '7') pts1b += 0.3;
+        if (q1bJust.length >= 10) pts1b += 0.3;
+        s.q1b = pts1b;
+
+        if (pts1b >= 0.9) {
+            setFeedback('fb-q1b', true, '✔ ¡Genial! Redondeamos hacia arriba mirando el 7 y lo has explicado bien.', false);
+        } else {
+            setFeedback('fb-q1b', false, '✘ Revisa: Se redondea hacia arriba mirando el 7, y tienes que escribir tu explicación.', false);
+        }
+
+        // --- EJERCICIO 2 ---
+        const q2aExpr = document.getElementById('q2a-expr').value.replace(/\s+/g, '');
+        const q2aRes = parseFloat(document.getElementById('q2a-res').value);
+        let pts2a = 0;
+        if (q2aRes === -3) pts2a += 0.6;
+        if (q2aExpr.includes('-2') && q2aExpr.includes('7') && q2aExpr.includes('8')) pts2a += 0.4;
+        s.q2a = pts2a;
+        if (pts2a === 1) {
+            setFeedback('fb-q2a', true, '✔ ¡Perfecto! -2 + 7 - 8 = -3 puntos.', false);
+        } else {
+            setFeedback('fb-q2a', false, '✘ Revisa la cuenta (-2 + 7 - 8) y su resultado (-3 puntos).', false);
+        }
+
+        const q2bDiff = parseFloat(document.getElementById('q2b-diff').value);
+        const q2bVal = document.getElementById('q2b-val').value;
+        let pts2b = 0;
+        if (q2bDiff === 13) pts2b += 0.6;
+        if (q2bVal === 'si') pts2b += 0.4;
+        s.q2b = pts2b;
+        if (pts2b === 1) {
+            setFeedback('fb-q2b', true, '✔ ¡Correcto! De -3 a 0 van 3 puntos y de 0 a +10 van 10 más: 13 puntos de diferencia.', false);
+        } else {
+            setFeedback('fb-q2b', false, '✘ Revisa: Desde -3 hasta +10 hay 13 puntos de diferencia, y la respuesta sí tiene sentido.', false);
+        }
+
+        // --- EJERCICIO 3 ---
+        const q3aExpr = document.getElementById('q3a-expr').value.replace(/\s+/g, '');
+        const q3aRes = parseFloat(document.getElementById('q3a-res').value);
+        let pts3a = 0;
+        if (q3aRes === 180) pts3a += 0.6;
+        if (q3aExpr.includes('12') && q3aExpr.includes('10') && q3aExpr.includes('5')) pts3a += 0.4;
+        s.q3a = pts3a;
+        if (pts3a === 1) {
+            setFeedback('fb-q3a', true, '✔ ¡Muy bien! 15 camisetas por 12 € cada una son 180 €.', false);
+        } else {
+            setFeedback('fb-q3a', false, '✘ Revisa: Son 10 + 5 = 15 camisetas. 15 · 12 = 180 €.', false);
+        }
+
+        const q3bAlc = document.getElementById('q3b-alc').value;
+        const q3bDif = parseFloat(document.getElementById('q3b-dif').value);
+        const q3bSem = parseFloat(document.getElementById('q3b-sem').value);
+        let pts3b = 0;
+        if (q3bAlc === 'no') pts3b += 0.3;
+        if (q3bDif === 30) pts3b += 0.35;
+        if (q3bSem === 6) pts3b += 0.35;
+        s.q3b = pts3b;
+        if (pts3b === 1) {
+            setFeedback('fb-q3b', true, '✔ ¡Genial! Les faltan 30 € (180 - 150) y jugando 6 partidas de 5 € los consiguen (30 : 5 = 6).', false);
+        } else {
+            setFeedback('fb-q3b', false, '✘ Revisa: Les faltan 30 € (180 - 150). Como ganan 5 € por partida, necesitan 30 : 5 = 6 partidas.', false);
+        }
+
+        // --- EJERCICIO 4 ---
+        const q4a1 = parseFloat(document.getElementById('q4a1').value);
+        const q4a2 = parseFloat(document.getElementById('q4a2').value);
+        const q4a3 = parseFloat(document.getElementById('q4a3').value);
+        let ok4a = (q4a1 === 8 ? 1 : 0) + (q4a2 === 25 ? 1 : 0) + (q4a3 === 1000 ? 1 : 0);
+        s.q4a = ok4a / 3;
+        setFeedback('fb-q4a', ok4a === 3, ok4a === 3
+            ? '✔ ¡Potencias perfectas! (8, 25 y 1.000).'
+            : '✘ Has acertado ' + ok4a + '/3. Resultados correctos: 8, 25 y 1000.', false);
+
+        const q4b1 = parseFloat(document.getElementById('q4b1').value);
+        const q4b2 = parseFloat(document.getElementById('q4b2').value);
+        const q4b3 = parseFloat(document.getElementById('q4b3').value);
+        let ok4b = (q4b1 === 15 ? 1 : 0) + (q4b2 === 33 ? 1 : 0) + (q4b3 === 28 ? 1 : 0);
+        s.q4b = ok4b / 3;
+        setFeedback('fb-q4b', ok4b === 3, ok4b === 3
+            ? '✔ ¡Cuentas combinadas perfectas! (15, 33 y 28).'
+            : '✘ Has acertado ' + ok4b + '/3. Resultados correctos: 15, 33 y 28.', false);
+
+        // --- EJERCICIO 5 (CE 7.1) ---
+        let mSum = 0;
+        let mCount = 0;
+        for (let k = 1; k <= 4; k++) {
+            const sel = document.querySelector('input[name="m' + k + '"]:checked');
+            if (sel) {
+                mSum += parseInt(sel.value, 10);
+                mCount++;
+            }
+        }
+        const q5Com = document.getElementById('q5-comentario').value.trim();
+        let scoreCE71 = 0;
+        if (mCount === 4) {
+            scoreCE71 = (mSum / 12) * 8 + (q5Com.length >= 10 ? 2 : 0.5);
+        } else {
+            scoreCE71 = (mSum / 12) * 6;
+        }
+        scoreCE71 = Math.min(10, scoreCE71);
+        setFeedback('fb-q5', true, mCount === 4
+            ? '✔ Autoevaluación guardada.'
+            : 'ℹ Faltó marcar alguna casilla de la tabla.', true);
+
+        // --- CÁLCULO POR CRITERIOS DE EVALUACIÓN ---
+        const ce11 = ((s.q1a + s.q1b + s.q2a + s.q3a) / 4) * 10;
+        const ce21 = ((s.q2a + s.q3a + s.q4a + s.q4b) / 4) * 10;
+        const ce22 = ((s.q2a + s.q3a + s.q3b + s.q4a + s.q4b) / 5) * 10;
+        const ce23 = ((s.q1b + s.q2b + s.q3b) / 3) * 10;
+        const ce61 = ((s.q1a + s.q1b + s.q2b + s.q3b) / 4) * 10;
+        const ce71 = scoreCE71;
+
+        const criterios = [
+            {
+                cod: 'CE 1.1',
+                desc: 'Interpretar problemas de la vida cotidiana, identificando los datos y lo que se pregunta.',
+                preg: '1a, 1b, 2a, 3a',
+                nota: ce11
+            },
+            {
+                cod: 'CE 2.1',
+                desc: 'Elegir y aplicar estrategias adecuadas para resolver problemas aritméticos.',
+                preg: '2a, 3a, 4a, 4b',
+                nota: ce21
+            },
+            {
+                cod: 'CE 2.2',
+                desc: 'Elegir y utilizar las operaciones pertinentes (suma, resta, multiplicación y división) para resolver problemas.',
+                preg: '2a, 3a, 3b, 4a, 4b',
+                nota: ce22
+            },
+            {
+                cod: 'CE 2.3',
+                desc: 'Comprobar la validez de las soluciones del problema y su coherencia con la situación planteada.',
+                preg: '1b, 2b, 3b',
+                nota: ce23
+            },
+            {
+                cod: 'CE 6.1',
+                desc: 'Reconocer y comprender el lenguaje matemático presente en la vida cotidiana.',
+                preg: '1a, 1b, 2b, 3b',
+                nota: ce61
+            },
+            {
+                cod: 'CE 7.1',
+                desc: 'Reconocer fortalezas y debilidades propias, empleando el esfuerzo y la constancia ante los retos.',
+                preg: '5',
+                nota: ce71
+            }
+        ];
+
+        const tbody = document.getElementById('grades-tbody');
+        tbody.innerHTML = '';
+        let sumaGlobal = 0;
+
+        criterios.forEach(function(c) {
+            sumaGlobal += c.nota;
+            const tr = document.createElement('tr');
+            tr.innerHTML = '<td><strong>' + c.cod + '</strong></td>' +
+                '<td class="desc-col">' + c.desc + '</td>' +
+                '<td>' + c.preg + '</td>' +
+                '<td><strong>' + c.nota.toFixed(2) + '</strong> / 10</td>' +
+                '<td>' + getRubricBadge(c.nota) + '</td>';
+            tbody.appendChild(tr);
+        });
+
+        const mediaGlobal = (sumaGlobal / criterios.length).toFixed(2);
+        document.getElementById('global-score').innerHTML = 'Media Criterial de la Prueba: ' + mediaGlobal + ' / 10';
+
+        // Bloquear todos los campos y mostrar resultados
+        bloquearCampos();
+        document.getElementById('results-panel').style.display = 'block';
+        document.getElementById('btn-pdf').style.display = 'inline-flex';
+        document.getElementById('pdf-tip').style.display = 'block';
+        document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function descargarPDF() {
+        const nombre = document.getElementById('st-nombre').value.trim() || 'Alumno';
+        const apellidos = document.getElementById('st-apellidos').value.trim() || 'SinApellidos';
+        const grupo = document.getElementById('st-grupo').value.trim() || '1ESO';
+        const tituloOriginal = document.title;
+
+        // Cambiamos temporalmente el título para sugerir el nombre del archivo al guardar el PDF
+        document.title = ('Prueba_U1_' + grupo + '_' + apellidos + '_' + nombre).replace(/\s+/g, '_');
+        sincronizarCamposParaImpresion();
+
+        window.print();
+
+        setTimeout(function() {
+            document.title = tituloOriginal;
+        }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnCorregir = document.getElementById('btn-corregir');
+        const btnPdf = document.getElementById('btn-pdf');
+        if (btnCorregir) btnCorregir.addEventListener('click', corregirExamen);
+        if (btnPdf) btnPdf.addEventListener('click', descargarPDF);
+    });
+</script>
+
+</body>
+</html>
